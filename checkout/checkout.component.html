@@ -1,0 +1,122 @@
+<section>
+  <div class="max-w-2xl mx-auto py-6 px-4 sm:px-6 lg:max-w-7xl lg:px-8">
+    <h1 class="mb-12 text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">Checkout</h1>
+
+    <form [formGroup]="dataForm" class="lg:grid lg:grid-cols-2 lg:gap-x-12 xl:gap-x-16" (ngSubmit)="startOrder()">
+      <div>
+        <!--billing form-->
+        <div>
+          <h2 class="text-lg font-medium text-gray-900">Dettagli di fatturazione</h2>
+
+          <app-billing [shipping]="shipping" [billingForm]="dataForm.controls['billing']"></app-billing>
+
+        </div>
+
+        <!--Shipping form-->
+        <div class="mt-10 border-t border-gray-200 pt-10">
+          <h2 class="text-lg font-medium text-gray-900">Dettagli di spedizione</h2>
+
+          <div class="flex items-center mt-6">
+            <input (click)="toggleShippingSameBilling()" type="checkbox" value="card"
+              class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300">
+            <label class="ml-3 block text-sm font-medium text-gray-700"> Spedire ad un Indirizzo differente? </label>
+          </div>
+
+          <app-shipping *ngIf="shippingSameBilling" [shippingForm]="dataForm.controls['shipping']"
+            [shipping]="shipping"></app-shipping>
+
+        </div>
+
+        <!--Spedition method-->
+        <div class="mt-10 border-t border-gray-200 pt-10">
+          <fieldset>
+            <legend class="text-lg font-medium text-gray-900">Metodo di spedizione</legend>
+
+            <div class="mt-4 grid grid-cols-1 gap-y-6 sm:grid-cols-2 sm:gap-x-4">
+              <!--
+                  Checked: "border-transparent", Not Checked: "border-gray-300"
+                  Active: "ring-2 ring-indigo-500"
+                -->
+              <label class="relative bg-white border rounded-lg shadow-sm p-4 flex cursor-pointer focus:outline-none">
+                <div class="flex-1 flex">
+                  <div class="flex flex-col">
+                    <span id="delivery-method-0-label" class="block text-sm font-medium text-gray-900"> Standard
+                    </span>
+                    <span id="delivery-method-0-description-0" class="mt-1 flex items-center text-sm text-gray-500">
+                      24-48h lavorative </span>
+                    <span id="delivery-method-0-description-1" class="mt-6 text-sm font-medium text-gray-900"> {{5 |
+                      currency:"EUR"}}
+                    </span>
+                  </div>
+                </div>
+                <!--Not Checked: "hidden"-->
+                <svg class="h-5 w-5 text-indigo-600" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+                  fill="currentColor" aria-hidden="true">
+                  <path fill-rule="evenodd"
+                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                    clip-rule="evenodd" />
+                </svg>
+                <!--
+                    Active: "border", Not Active: "border-2"
+                    Checked: "border-indigo-500", Not Checked: "border-transparent"
+                  -->
+                <div class="absolute -inset-px rounded-lg border-2 pointer-events-none" aria-hidden="true"></div>
+              </label>
+
+            </div>
+          </fieldset>
+        </div>
+
+        <!-- Payment form -->
+        <div class="mt-10 border-t border-gray-200 pt-10">
+          <h2 class="text-lg font-medium text-gray-900">Pagamento</h2>
+
+          <app-tabs-payment [dataForm]="dataForm"></app-tabs-payment>
+
+          <app-card *ngIf="dataForm.get('type')?.value === 'card'" [cardForm]="dataForm.controls['card']"></app-card>
+
+        </div>
+      </div>
+
+      <!-- Order summary -->
+      <div class="mt-10 lg:mt-0">
+        <div class="lg:sticky lg:top-32">
+          <h2 class="text-lg font-medium text-gray-900">Riassunto ordine</h2>
+
+          <div class="mt-4 border border-gray-200 rounded-lg shadow-sm">
+            <ul role="list" class="divide-y divide-gray-200">
+
+              <app-checkout-product [products]="products"></app-checkout-product>
+
+            </ul>
+
+            <dl class="border-t border-gray-200 py-6 px-4 space-y-6 sm:px-6">
+              <div class="flex items-center justify-between">
+                <dt class="text-sm">Subtotal</dt>
+                <dd class="text-sm font-medium text-gray-900">{{total - ((total * 22) / 100) | currency:"EUR"}}</dd>
+              </div>
+              <div class="flex items-center justify-between">
+                <dt class="text-sm">Spedizione</dt>
+                <dd class="text-sm font-medium text-gray-900">{{5 | currency:"EUR"}}</dd>
+              </div>
+              <div class="flex items-center justify-between">
+                <dt class="text-sm">Iva 22%</dt>
+                <dd class="text-sm font-medium text-gray-900">{{(total * 22) / 100 | currency:"EUR"}}</dd>
+              </div>
+              <div class="flex items-center justify-between border-t border-gray-200 pt-6">
+                <dt class="text-base font-medium">Ordine totale</dt>
+                <dd class="text-base font-medium text-gray-900">{{total | currency:"EUR"}}</dd>
+              </div>
+            </dl>
+
+            <div class="border-t border-gray-200 py-6 px-4 sm:px-6">
+              <button type="submit"
+                class="w-full bg-indigo-600 border border-transparent rounded-md shadow-sm py-3 px-4 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-indigo-500">Conferma
+                ordine</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</section>

@@ -1,0 +1,100 @@
+<div [formGroup]="billingForm" class="mt-4 grid grid-cols-1 gap-y-6 sm:grid-cols-2 sm:gap-x-4">
+    <div>
+        <label class="block text-sm font-medium text-gray-700">Nome</label>
+        <div class="mt-1">
+            <input placeholder="Nome" type="text" formControlName="first_name"
+                class="block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                [ngClass]="{'focus:border-red-600 focus:ring-red-600 border-red-600': billingForm.get('first_name').errors}">
+        </div>
+    </div>
+
+    <div>
+        <label class="block text-sm font-medium text-gray-700">Cognome</label>
+        <div class="mt-1">
+            <input placeholder="Cognome" type="text" formControlName="last_name"
+                class="block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                [ngClass]="{'focus:border-red-600 focus:ring-red-600 border-red-600': billingForm.get('last_name').errors}">
+        </div>
+    </div>
+
+    <div class="sm:col-span-2">
+        <label class="block text-sm font-medium text-gray-700">Company</label>
+        <div class="mt-1">
+            <input placeholder="Company" type="text" formControlName="company"
+                class="block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+        </div>
+    </div>
+
+    <div class="sm:col-span-2">
+        <label class="block text-sm font-medium text-gray-700">Via/piazza e numero civico</label>
+        <div class="mt-1">
+            <input placeholder="Via/piazza e numero civico" type="text" formControlName="address_1"
+                class="block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                [ngClass]="{'focus:border-red-600 focus:ring-red-600 border-red-600': billingForm.get('address_1').errors}">
+        </div>
+    </div>
+
+    <div class="sm:col-span-2">
+        <label class="block text-sm font-medium text-gray-700">Appartamento, suite, unità etc.</label>
+        <div class="mt-1">
+            <input placeholder="Appartamento, suite, unità, etc." type="text" formControlName="address_2"
+                class="block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+        </div>
+    </div>
+
+    <div>
+        <label class="block text-sm font-medium text-gray-700">Città</label>
+        <div class="mt-1">
+            <input placeholder="Città" type="text" formControlName="city"
+                class="block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                [ngClass]="{'focus:border-red-600 focus:ring-red-600 border-red-600': billingForm.get('city').errors}">
+        </div>
+    </div>
+
+    <div>
+        <label class="block text-sm font-medium text-gray-700">Paese</label>
+        <div class="mt-1">
+            <select formControlName="country"
+                class="block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                [ngClass]="{'focus:border-red-600 focus:ring-red-600 border-red-600': billingForm.get('country').errors}">
+                <option *ngFor="let s of shipping" [value]="s.id">{{s.name}}</option>
+            </select>
+        </div>
+    </div>
+
+    <div>
+        <label class="block text-sm font-medium text-gray-700">Provincia</label>
+        <div class="mt-1">
+            <input type="text" formControlName="state" placeholder="Provincia"
+                class="block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                [ngClass]="{'focus:border-red-600 focus:ring-red-600 border-red-600': billingForm.get('state').errors}">
+        </div>
+    </div>
+
+    <div>
+        <label class="block text-sm font-medium text-gray-700">Codice postale</label>
+        <div class="mt-1">
+            <input type="text" formControlName="postcode" placeholder="Codice postale"
+                class="block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                [ngClass]="{'focus:border-red-600 focus:ring-red-600 border-red-600': billingForm.get('postcode').errors}">
+        </div>
+    </div>
+
+    <div class="sm:col-span-2">
+        <label class="block text-sm font-medium text-gray-700">Numero di telefono</label>
+        <div class="mt-1">
+            <input type="tel" formControlName="phone" placeholder="Numero di telefono"
+                class="block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                [ngClass]="{'focus:border-red-600 focus:ring-red-600 border-red-600': billingForm.get('phone').errors}">
+        </div>
+    </div>
+
+    <div class="sm:col-span-2">
+        <label class="block text-sm font-medium text-gray-700">Indirizzo email</label>
+        <div class="mt-1">
+            <input type="email" formControlName="email" placeholder="Email"
+                class="block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                [ngClass]="{'focus:border-red-600 focus:ring-red-600 border-red-600': billingForm.get('email').errors}">
+        </div>
+    </div>
+</div>

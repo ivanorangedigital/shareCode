@@ -1,0 +1,43 @@
+<div class="mt-6 grid grid-cols-4 gap-y-6 gap-x-4" [formGroup]="cardForm">
+
+    <div class="col-span-4">
+        <label class="block text-sm font-medium text-gray-700">Numero carta</label>
+        <div class="mt-1">
+            <input type="text" maxlength="16" formControlName="number"
+                placeholder="es. 4242 4242 4242 4242"
+                class="block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                [ngClass]="{'focus:border-red-600 focus:ring-red-600 border-red-600': cardForm.get('number').errors}">
+        </div>
+    </div>
+
+    <div class="col-span-1">
+        <label class="block text-sm font-medium text-gray-700">MM</label>
+        <div class="mt-1">
+            <select formControlName="exp_month"
+                class="block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                [ngClass]="{'focus:border-red-600 focus:ring-red-600 border-red-600': cardForm.get('exp_month').errors}">
+                <option *ngFor="let m of exp_month" [value]="m">{{m}}</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="col-span-2">
+        <label class="block text-sm font-medium text-gray-700">YYYY</label>
+        <div class="mt-1">
+            <select formControlName="exp_year"
+                class="block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                [ngClass]="{'focus:border-red-600 focus:ring-red-600 border-red-600': cardForm.get('exp_year').errors}">
+                <option *ngFor="let y of exp_year" [value]="y">{{y}}</option>
+            </select>
+        </div>
+    </div>
+
+    <div>
+        <label class="block text-sm font-medium text-gray-700">CVC</label>
+        <div class="mt-1">
+            <input type="text" formControlName="cvc" placeholder="es. 123" maxlength="3"
+                class="block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                [ngClass]="{'focus:border-red-600 focus:ring-red-600 border-red-600': cardForm.get('cvc').errors}">
+        </div>
+    </div>
+</div>

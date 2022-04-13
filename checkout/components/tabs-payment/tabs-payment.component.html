@@ -1,0 +1,9 @@
+<section class="mt-4" [formGroup]="dataForm">
+    <div class="space-y-4 sm:flex sm:items-center sm:space-y-0 sm:space-x-10">
+        <div class="flex items-center" *ngFor="let p of paymentType">
+            <input formControlName="type" type="radio" [value]="p.id"
+                class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300">
+            <label class="ml-3 block text-sm font-medium text-gray-700">{{p.name}}</label>
+        </div>
+    </div>
+</section>
